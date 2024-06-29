@@ -1,39 +1,21 @@
-/* auth.js provides LOGIN-related functions */
-
 "use strict";
 
-const apiBaseURL1 = "http://microbloglite.us-east-2.elasticbeanstalk.com";
-// Backup server (mirror):   "https://microbloglite.onrender.com"
+const apiBaseURL = "http://microbloglite.us-east-2.elasticbeanstalk.com";
 
-// NOTE: API documentation is available at /docs 
-// For example: http://microbloglite.us-east-2.elasticbeanstalk.com/docs
-
-
-// You can use this function to get the login data of the logged-in
-// user (if any). It returns either an object including the username
-// and token, or an empty object if the visitor is not logged in.
-function getLoginData () {
+// Function to get login data from local storage
+function getLoginData() {
     const loginJSON = window.localStorage.getItem("login-data");
     return JSON.parse(loginJSON) || {};
 }
 
-
-// You can use this function to see whether the current visitor is
-// logged in. It returns either `true` or `false`.
-function isLoggedIn () {
+// Function to check if the user is logged in
+function isLoggedIn() {
     const loginData = getLoginData();
     return Boolean(loginData.token);
 }
 
-
-// This function is already being used in the starter code for the
-// landing page, in order to process a user's login. READ this code,
-// and feel free to re-use parts of it for other `fetch()` requests
-// you may need to write.
-const apiBaseURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com';
-
+// Function to log in the user
 function login(loginData) {
-    // POST /auth/login
     const options = {
         method: "POST",
         headers: {
@@ -53,7 +35,6 @@ function login(loginData) {
 
             console.log("Login successful. Redirecting to posts page...");
             window.localStorage.setItem("login-data", JSON.stringify(loginResponse));
-            // Redirect to the posts page if login is successful
             window.location.assign("posts/MainPosts.html");
 
             return loginResponse;
@@ -64,7 +45,7 @@ function login(loginData) {
         });
 }
 
-// Example usage: attach to a login form submission
+// Attach the login function to the login form submission
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
@@ -73,55 +54,9 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     login({ username, password });
 });
 
-
-// This is the `logout()` function you will use for any logout button
-// which you may include in various pages in your app. Again, READ this
-// function and you will probably want to re-use parts of it for other
-// `fetch()` requests you may need to write.
-function logout () {
-    const loginData = getLoginData();
-
-    // GET /auth/logout
-    const options = { 
-        method: "GET",
-        headers: { 
-            // This header is how we authenticate our user with the
-            // server for any API requests which require the user
-            // to be logged-in in order to have access.
-            // In the API docs, these endpoints display a lock icon.
-            Authorization: `Bearer ${loginData.token}`,
-        },
-    };
-
-    fetch(apiBaseURL + "/auth/logout", options)
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .finally(() => {
-            // We're using `finally()` so that we will continue with the
-            // browser side of logging out (below) even if there is an 
-            // error with the fetch request above.
-
-            window.localStorage.removeItem("login-data");  // remove login data from LocalStorage
-            window.location.assign("/");  // redirect back to landing page
-        });
-}
-/////
-
-
-
-// Mock function to check if the user is logged in
-function isLoggedIn() {
-    return localStorage.getItem('login-data') !== null;
-}
-
-// Function for logging out
+// Function to log out the user
 function logout() {
-    const loginData = JSON.parse(localStorage.getItem('login-data'));
-
-    if (!loginData) {
-        window.location.href = 'index.html';
-        return;
-    }
+    const loginData = getLoginData();
 
     const options = {
         method: "GET",
@@ -134,8 +69,8 @@ function logout() {
         .then(response => response.json())
         .then(data => console.log(data))
         .finally(() => {
-            localStorage.removeItem("login-data");  // Remove login data from LocalStorage
-            window.location.assign("index.html");  // Redirect back to landing page (index.html)
+            window.localStorage.removeItem("login-data");
+            window.location.assign("index.html");
         });
 }
 
@@ -151,12 +86,14 @@ document.getElementById('logout-button').addEventListener('click', logout);
 document.getElementById('create-post-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const postContent = document.getElementById('post-content').value;
+    const loginData = getLoginData();
 
     try {
-        const response = await fetch('/api/posts', {
+        const response = await fetch(apiBaseURL + '/posts', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${loginData.token}`
             },
             body: JSON.stringify({ content: postContent })
         });
