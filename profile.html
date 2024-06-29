@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/profile.css">
 </head>
 
 <body>
-    <h1> Profile</h1>
+    <h1>Profile</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">YOUR MICROBLOG NETWORK</a>
+            <a class="navbar-brand" href="/index.html">YOUR MICROBLOG NETWORK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -19,34 +24,77 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="/index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="registration.html">Registration</a>
+                        <a class="nav-link" href="/registration.html">Registration</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="MainPosts.html">Posts</a>
+                        <a class="nav-link" href="/posts/MainPosts.html">Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">Profile</a>
+                        <a class="nav-link" href="/profile.html">Profile</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+
+    <main class="container">
+        <!-- Post input area -->
+        <div class="mb-3">
+            <textarea id="postInput" class="form-control" placeholder="What's on your mind? " rows="3"></textarea>
+            <br>
+            <button class="btn btn-primary" onclick="displayPost()">Post</button>
+            <button class="btn btn-secondary" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Display area for posts -->
+        <div id="displayArea"></div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!-- Profile Script -->
+    <script src="scripts/profile.js"></script>
+    <!-- Post Display and Logout Script -->
+    <script>
+        let posts = [];
+
+        function displayPost() {
+            const postText = document.getElementById('postInput').value;
+            const displayArea = document.getElementById('displayArea');
+
+            if (postText.trim() === '') {
+                alert('Please write something before posting.');
+            } else {
+                posts.push(postText);
+                document.getElementById('postInput').value = ''; // Clear the input field after posting
+                displayPosts();
+            }
+        }
+
+        function displayPosts() {
+            const displayArea = document.getElementById('displayArea');
+            displayArea.innerHTML = '';
+
+            posts.forEach((post) => {
+                const postBox = document.createElement('div');
+                postBox.classList.add('postBox', 'card', 'mb-3');
+                postBox.innerHTML = `<div class="card-body"><p class="card-text">${post}</p></div>`;
+                displayArea.appendChild(postBox);
+            });
+        }
+
+        function logout() {
+            window.localStorage.removeItem("login-data");
+            window.location.href = '/index.html';
+        }
+    </script>
 </body>
-<div id="profile-page">
-    <h1>Profile Page</h1>
-    <button id="logout-button"> Logout </button>
-    <a href="posts/MainPosts.html">Go to Posts Page</a>
-
-    <form id="create-post-form">
-        <h2>Create a Post</h2>
-        <textarea id="post-content" placeholder="What's on your mind?"></textarea>
-        <button type="submit">Post</button>
-    </form>
-</div>
-
-<script src="scripts/profile.js"></script>
 
 </html>

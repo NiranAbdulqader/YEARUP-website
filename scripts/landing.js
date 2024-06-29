@@ -24,3 +24,4 @@ loginForm.addEventListener('submit', function(event) {
 function redirectToRegistration() {
     window.location.href = 'registration.html'; // Adjust URL as per your project structure
 }
+
