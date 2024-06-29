@@ -6,12 +6,12 @@ function isLoggedIn() {
 // Mock function for logging out
 function logout() {
     localStorage.removeItem('loggedIn');
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 // Redirect to login page if not logged in
 if (!isLoggedIn()) {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 // Handle logout button click
