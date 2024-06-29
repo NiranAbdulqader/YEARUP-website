@@ -1,0 +1,54 @@
+body {
+    background-color: #f0faff; /* Light blue background */
+}
+
+.container {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.form-control {
+    border-color: #3498db; /* Blue border for input fields */
+}
+
+.btn-primary {
+    background-color: #3498db; /* Blue background for primary button */
+    border-color: #3498db; /* Blue border for primary button */
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Darker blue background on hover */
+    border-color: #2980b9; /* Darker blue border on hover */
+}
+
+.btn-secondary {
+    background-color: #95a5a6; /* Gray background for secondary button */
+    border-color: #95a5a6; /* Gray border for secondary button */
+    color: #ffffff; /* White text for secondary button */
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d; /* Darker gray background on hover */
+    border-color: #81bec2; /* Darker gray border on hover */
+}
+
+.navbar {
+    background-color: #347aa9; /* Blue navbar background */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #425879; /* White text for navbar links */
+}
+
+.navbar-toggler-icon {
+    background-color: #c3c2ec; /* White background for navbar toggler icon */
+}
+
+.navbar-toggler {
+    border-color: #ffffff; /* White border for navbar toggler */
+}
