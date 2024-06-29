@@ -30,7 +30,7 @@ function isLoggedIn () {
 // landing page, in order to process a user's login. READ this code,
 // and feel free to re-use parts of it for other `fetch()` requests
 // you may need to write.
-const apiBaseURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com/auth/login';
+const apiBaseURL = 'http://microbloglite.us-east-2.elasticbeanstalk.com';
 
 function login(loginData) {
     // POST /auth/login
