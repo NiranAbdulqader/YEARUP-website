@@ -40,23 +40,22 @@
 </nav>
 
 <body>
+    <h2>Create an Account</h2>
+    <form id="registrationForm">
+        <div>
+            <label for="newUsername">New Username</label>
+            <input type="text" id="newUsername" name="newUsername" minlength="3" required>
+        </div>
 
-    <div class="login-container">
-        <form id="login-form">
-            <h2>SignUp</h2>
-            <div class="input-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username">
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-                <input type="reset" value="Reset">
-            </div>
-            <button type="submit" id="login-btn">SignUp</button>
-        </form>
-        <div id="login-message"></div>
-    </div>
+        <div>
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" name="newPassword" minlength="6" required>
+        </div>
+
+        <button type="submit">Create Account</button>
+        <input type="reset" value="Reset">
+
+    </form>
 
     <script src="scripts/regis.js"></script>
 </body>

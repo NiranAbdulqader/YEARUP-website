@@ -1,31 +1,26 @@
-/* Landing Page JavaScript */
-
 "use strict";
 
-const loginForm = document.querySelector("#login");
+const loginForm = document.getElementById('loginForm');
 
-loginForm.onsubmit = function (event) {
-    // Prevent the form from refreshing the page,
-    // as it will do by default when the Submit event is triggered:
+loginForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // We can use loginForm.username (for example) to access
-    // the input element in the form which has the ID of "username".
-    const loginData = {
-        username: loginForm.username.value,
-        password: loginForm.password.value,
+    const username = loginForm.username.value;
+    const password = loginForm.password.value;
+
+    // Retrieve stored user data from localStorage
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+
+    if (storedUserData && username === storedUserData.username && password === storedUserData.password) {
+        // Successful login, redirect to posts page
+        window.location.href = 'posts/MainPosts.html';
+    } else {
+        // Invalid credentials, redirect to registration page with message
+        alert("Invalid username or password. Please try again.");
+        window.location.href = 'registration.html';
     }
-
-    // Disables the button after the form has been submitted already:
-    loginForm.loginButton.disabled = true;
-
-    // Time to actually process the login using the function from auth.js!
-    login(loginData);
-};
+});
 
 function redirectToRegistration() {
-    window.location.href = 'registration.html'; // Adjust the URL as needed
+    window.location.href = 'registration.html'; // Adjust URL as per your project structure
 }
-
-////
-
