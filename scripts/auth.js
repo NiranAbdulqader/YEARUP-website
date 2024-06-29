@@ -54,7 +54,7 @@ function login(loginData) {
             console.log("Login successful. Redirecting to posts page...");
             window.localStorage.setItem("login-data", JSON.stringify(loginResponse));
             // Redirect to the posts page if login is successful
-            window.location.assign("/posts/MainPosts.html");
+            window.location.assign("posts/MainPosts.html");
 
             return loginResponse;
         })
