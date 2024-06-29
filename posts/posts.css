@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#postInput {
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+}
+
+.postBox {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    min-height: 100px;
+}
