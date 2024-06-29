@@ -13,7 +13,7 @@ loginForm.addEventListener('submit', function(event) {
 
     if (storedUserData && username === storedUserData.username && password === storedUserData.password) {
         // Successful login, redirect to posts page
-        window.location.href = 'posts/MainPosts.html';
+        window.location.href = 'posts/postblog.html';
     } else {
         // Invalid credentials, redirect to registration page with message
         alert("Invalid username or password. Please try again.");
